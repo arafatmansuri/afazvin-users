@@ -9,7 +9,6 @@ export const POST = apiHandler({
   POST: async (req: Request) => {
     const body = await req.json();
 
-    // Validate request body
     const parsed = createInquirySchema.safeParse(body);
     if (!parsed.success) {
       throw AppError.badRequest(parsed.error.issues[0].message);
