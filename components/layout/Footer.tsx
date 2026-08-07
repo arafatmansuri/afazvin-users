@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Mail, Phone, MessageCircle } from "lucide-react";
 
 const CATEGORIES = [
@@ -26,10 +27,14 @@ export function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
           {/* Brand */}
           <div className="space-y-4">
-            <Link href="/" className="inline-block">
-              <span className="font-display text-2xl font-semibold tracking-[0.2em] uppercase">
-                Afazvin
-              </span>
+            <Link href="/" className="inline-block" aria-label="Afazvin home">
+              <Image
+                src="/logo-nav.png"
+                alt="Afazvin"
+                width={200}
+                height={140}
+                className="h-12 md:h-14 w-auto max-w-[200px] object-contain object-left"
+              />
             </Link>
             <p className="text-sm leading-relaxed text-text-inverse/70 max-w-xs">
               Premium wholesale menswear manufacturer. Crafting blazers,

@@ -30,13 +30,13 @@ const PLACEHOLDER_OCCASIONS: OccasionCardData[] = [
     image:
       "https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=900&auto=format&fit=crop",
   },
-  {
-    id: "5",
-    name: "Mehendi",
-    slug: "mehendi",
-    image:
-      "https://images.unsplash.com/photo-1591604466107-ec95fb30405f?q=80&w=900&auto=format&fit=crop",
-  },
+  // {
+  //   id: "5",
+  //   name: "Mehendi",
+  //   slug: "mehendi",
+  //   image:
+  //     "https://images.unsplash.com/photo-1591604466107-ec95fb30405f?q=80&w=900&auto=format&fit=crop",
+  // },
   {
     id: "6",
     name: "Cocktail",

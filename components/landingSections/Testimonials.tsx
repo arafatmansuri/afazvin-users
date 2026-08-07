@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
-import Image from "next/image";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
+import { useCallback, useEffect, useState } from "react";
 
 const TESTIMONIALS = [
   {
@@ -41,14 +41,26 @@ const TESTIMONIALS = [
 export function Testimonials() {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [fading, setFading] = useState(false);
+
+  const goTo = useCallback((next: number) => {
+    setFading(true);
+    setTimeout(() => {
+      setIndex(next);
+      setFading(false);
+    }, 280);
+  }, []);
 
   const next = useCallback(() => {
-    setIndex((i) => (i + 1) % TESTIMONIALS.length);
-  }, []);
+    goTo((index + 1) % TESTIMONIALS.length);
+    if (index + 1 >= TESTIMONIALS.length) {
+      setIndex(0);
+    }
+  }, [goTo, index]);
 
   useEffect(() => {
     if (paused) return;
-    const id = setInterval(next, 7000);
+    const id = setInterval(next, 3000);
     return () => clearInterval(id);
   }, [paused, next]);
 
@@ -69,7 +81,12 @@ export function Testimonials() {
           onFocus={() => setPaused(true)}
           onBlur={() => setPaused(false)}
         >
-          <blockquote className="relative rounded-lg border border-accent/30 bg-surface px-8 py-12 md:px-14 md:py-16 shadow-sm">
+          <blockquote
+            className={cn(
+              "relative rounded-lg border border-accent/30 bg-surface px-8 py-12 md:px-14 md:py-16 shadow-sm transition-opacity duration-300 ease-[var(--ease-in-out-standard)]",
+              fading ? "opacity-0" : "opacity-100",
+            )}
+          >
             <p className="font-display text-xl md:text-2xl leading-relaxed text-text-primary text-center">
               “{current.quote}”
             </p>
@@ -103,7 +120,7 @@ export function Testimonials() {
                 role="tab"
                 aria-selected={i === index}
                 aria-label={`Testimonial ${i + 1}`}
-                onClick={() => setIndex(i)}
+                onClick={() => goTo(i)}
                 className={cn(
                   "h-2 rounded-full transition-all duration-300",
                   i === index

@@ -26,12 +26,12 @@ async function getCategories() {
   console.log("Categories:", categories);
 }
 
-getCategories()
-  .then(() => {
-    console.log("Categories retrieved successfully");
-    process.exit(0);
-  })
-  .catch((err) => {
-    console.error("Error retrieving categories:", err);
-    process.exit(1);
-  });
+// getCategories()
+//   .then(() => {
+//     console.log("Categories retrieved successfully");
+//     process.exit(0);
+//   })
+//   .catch((err) => {
+//     console.error("Error retrieving categories:", err);
+//     process.exit(1);
+//   });

@@ -1,16 +1,10 @@
+import { cn } from "@/lib/utils";
+import { ICategory } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
-
-export interface CategoryCardData {
-  id: string;
-  name: string;
-  slug: string;
-  image: string;
-}
 
 interface CategoryCardProps {
-  category: CategoryCardData;
+  category: ICategory;
   className?: string;
 }
 

@@ -1,5 +1,7 @@
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { ProductCard, ProductCardData } from "@/components/ui/ProductCard";
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 const PLACEHOLDER_PRODUCTS: ProductCardData[] = [
   {
@@ -17,7 +19,7 @@ const PLACEHOLDER_PRODUCTS: ProductCardData[] = [
     name: "Midnight Navy Structured Blazer",
     slug: "midnight-navy-structured-blazer",
     image:
-      "https://images.unsplash.com/photo-1593030761756-601896fa1278?q=80&w=700&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=700&auto=format&fit=crop",
     hoverImage:
       "https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=700&auto=format&fit=crop",
     views: 980,
@@ -30,14 +32,14 @@ const PLACEHOLDER_PRODUCTS: ProductCardData[] = [
       "https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?q=80&w=700&auto=format&fit=crop",
     views: 856,
   },
-  {
-    id: "4",
-    name: "Emerald Indo-Western Bandhgala",
-    slug: "emerald-indo-western-bandhgala",
-    image:
-      "https://images.unsplash.com/photo-1620799140408-ed5341ba2870?q=80&w=700&auto=format&fit=crop",
-    views: 742,
-  },
+  // {
+  //   id: "4",
+  //   name: "Emerald Indo-Western Bandhgala",
+  //   slug: "emerald-indo-western-bandhgala",
+  //   image:
+  //     "https://images.unsplash.com/photo-1620799140408-ed5341ba2870?q=80&w=700&auto=format&fit=crop",
+  //   views: 742,
+  // },
   {
     id: "5",
     name: "Classic Black Velvet Koti",
@@ -46,14 +48,14 @@ const PLACEHOLDER_PRODUCTS: ProductCardData[] = [
       "https://images.unsplash.com/photo-1603252109303-2751441dd157?q=80&w=700&auto=format&fit=crop",
     views: 691,
   },
-  {
-    id: "6",
-    name: "Rose Gold Embroidered Kurta Set",
-    slug: "rose-gold-embroidered-kurta",
-    image:
-      "https://images.unsplash.com/photo-1583391733956-6c78276477e2?q=80&w=700&auto=format&fit=crop",
-    views: 623,
-  },
+  // {
+  //   id: "6",
+  //   name: "Rose Gold Embroidered Kurta Set",
+  //   slug: "rose-gold-embroidered-kurta",
+  //   image:
+  //     "https://images.unsplash.com/photo-1583391733956-6c78276477e2?q=80&w=700&auto=format&fit=crop",
+  //   views: 623,
+  // },
   {
     id: "7",
     name: "Charcoal Slim Fit Suit",
@@ -102,6 +104,18 @@ export function BestSellers({
               className="min-w-[78%] snap-start"
             />
           ))}
+        </div>
+        <div className="mt-8 md:mt-10 flex justify-center">
+          <Link
+            href="/products"
+            className="group inline-flex items-center gap-2 text-sm font-semibold tracking-wide uppercase text-primary hover:text-primary-hover transition-colors duration-200"
+          >
+            Explore All
+            <ArrowRight
+              className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
+              strokeWidth={1.75}
+            />
+          </Link>
         </div>
       </div>
     </section>

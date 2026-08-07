@@ -6,6 +6,20 @@ const productSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    slug: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    category: {
+      ref: "Category",
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+    },
+    occasion: {
+      ref: "Occasion",
+      type: mongoose.Schema.Types.ObjectId,
+    },
     description: {
       type: String,
     },
@@ -16,7 +30,7 @@ const productSchema = new mongoose.Schema(
     thumbnailImageAlt: {
       type: String,
     },
-    zoomedImage: {
+    hoverImage: {
       type: String,
     },
     images: [
@@ -39,10 +53,14 @@ const productSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    isBestSeller: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true },
 );
 
-const Product = mongoose.model("Product", productSchema);
+const Product = mongoose.model("Cloths", productSchema);
 
 export default Product;

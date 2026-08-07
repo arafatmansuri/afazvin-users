@@ -9,20 +9,23 @@ import { Statistics } from "@/components/landingSections/Statistics";
 import { Testimonials } from "@/components/landingSections/Testimonials";
 import { InquirySection } from "@/components/landingSections/InquirySection";
 import { FloatingActions } from "@/components/ui/FloatingActions";
+import { getBestSellers, getCategories, getOccasions } from "@/lib/placeholder-data/landing";
+import { connectDB } from "@/lib/mongoose";
 
-export default function LandingPage() {
+export default async function LandingPage() {
   // Server-rendered. Categories, Occasions, and Best Sellers use
   // placeholder data here. Replace with server fetches when models are wired:
-  // const categories = await getCategories();
-  // const occasions = await getOccasions();
-  // const bestSellers = await getBestSellers(10);
+  await connectDB();
+  const categories = await getCategories();
+  const occasions = await getOccasions();
+  const bestSellers = await getBestSellers(10);
 
   return (
     <>
       <Navbar />
       <main>
         <Hero />
-        <Categories />
+        <Categories categories={categories} />
         <Occasions />
         <BestSellers />
         <WhyChooseUs />

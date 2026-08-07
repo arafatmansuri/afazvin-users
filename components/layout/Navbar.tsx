@@ -1,10 +1,11 @@
 "use client";
 
-import { Button } from "@/components/ui/Button";
-import { cn } from "@/lib/utils";
-import { ChevronDown, Menu, X } from "lucide-react";
-import Link from "next/link";
 import { useEffect, useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { Menu, X, ChevronDown } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/Button";
 
 const CATEGORIES = [
   { name: "Blazers", slug: "blazers" },
@@ -47,15 +48,27 @@ export function Navbar() {
         className={cn(
           "fixed top-0 inset-x-0 z-[100] transition-all duration-250 ease-[var(--ease-in-out-standard)]",
           scrolled
-            ? "h-16 md:h-[72px] bg-secondary/95 backdrop-blur-sm shadow-xs"
-            : "h-20 md:h-24 bg-transparent",
+            ? "h-[72px] md:h-20 bg-secondary/95 backdrop-blur-sm shadow-xs"
+            : "h-[88px] md:h-[104px] bg-transparent",
         )}
       >
         <div className="container-xl h-full flex items-center justify-between gap-6">
-          <Link href="/" className="relative shrink-0 z-10">
-            <span className="font-display text-xl md:text-2xl font-semibold tracking-[0.2em] text-text-inverse uppercase">
-              Afazvin
-            </span>
+          <Link
+            href="/"
+            className="relative shrink-0 z-10 flex items-center py-1"
+            aria-label="Afazvin home"
+          >
+            <Image
+              src="/logo-nav.png"
+              alt="Afazvin"
+              width={220}
+              height={155}
+              className={cn(
+                "w-auto max-w-[min(280px,45vw)] object-contain object-left transition-all duration-250",
+                scrolled ? "h-11 md:h-12" : "h-12 md:h-14 lg:h-16",
+              )}
+              priority
+            />
           </Link>
 
           {/* Desktop nav */}
@@ -133,10 +146,10 @@ export function Navbar() {
             </Link>
           </div>
 
-          {/* Mobile toggle */}
+          {/* Mobile toggle — single close control when open */}
           <button
             type="button"
-            className="lg:hidden relative z-10 flex h-11 w-11 items-center justify-center text-text-inverse"
+            className="lg:hidden relative z-[110] flex h-11 w-11 items-center justify-center text-text-inverse"
             onClick={() => setMobileOpen((v) => !v)}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
@@ -150,7 +163,7 @@ export function Navbar() {
         </div>
       </header>
 
-      {/* Mobile drawer */}
+      {/* Mobile drawer — no second close icon */}
       <div
         className={cn(
           "fixed inset-0 z-[90] lg:hidden transition-opacity duration-300",
@@ -162,25 +175,22 @@ export function Navbar() {
         <div
           className="absolute inset-0 bg-secondary/60"
           onClick={() => setMobileOpen(false)}
+          aria-hidden
         />
         <div
           className={cn(
-            "absolute top-0 right-0 h-full w-[min(100%,320px)] bg-secondary shadow-lg transition-transform duration-300 ease-[var(--ease-out-standard)] flex flex-col",
+            "absolute top-0 right-0 h-full w-[min(100%,320px)] bg-secondary shadow-lg transition-transform duration-300 ease-[var(--ease-out-standard)] flex flex-col pt-[72px] md:pt-20",
             mobileOpen ? "translate-x-0" : "translate-x-full",
           )}
         >
-          <div className="flex items-center justify-between px-5 h-16 border-b border-white/10">
-            <span className="font-display text-lg tracking-[0.15em] text-text-inverse uppercase">
-              Afazvin
-            </span>
-            <button
-              type="button"
-              onClick={() => setMobileOpen(false)}
-              className="h-10 w-10 flex items-center justify-center text-text-inverse"
-              aria-label="Close menu"
-            >
-              <X className="h-5 w-5" strokeWidth={1.5} />
-            </button>
+          <div className="px-5 pt-3 pb-4 border-b border-white/10">
+            <Image
+              src="/logo-nav.png"
+              alt="Afazvin"
+              width={180}
+              height={126}
+              className="h-11 w-auto max-w-[180px] object-contain object-left"
+            />
           </div>
 
           <nav className="flex-1 overflow-y-auto px-5 py-6 space-y-1">
