@@ -10,6 +10,7 @@ export function Hero() {
       {/* Background image */}
       <div className="absolute inset-0">
         <Image
+          // src="/logo-nav.png"
           src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?q=80&w=2000&auto=format&fit=crop"
           alt="Premium menswear tailored blazer"
           fill

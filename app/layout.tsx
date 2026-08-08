@@ -20,6 +20,9 @@ export const metadata: Metadata = {
   title: "Afazvin | Premium Wholesale Menswear",
   description:
     "Wholesale manufacturer of blazers, sherwanis, Indo-western, Jodhpuri, ethnic wear and more for retailers across India.",
+  // icons: {
+  //   icon: "/logo-nav.png",
+  // },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
