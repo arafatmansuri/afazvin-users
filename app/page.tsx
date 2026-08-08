@@ -1,39 +1,41 @@
-import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
-import { Hero } from "@/components/landingSections/Hero";
-import { Categories } from "@/components/landingSections/Categories";
-import { Occasions } from "@/components/landingSections/Occasions";
 import { BestSellers } from "@/components/landingSections/BestSellers";
-import { WhyChooseUs } from "@/components/landingSections/WhyChooseUs";
+import { Categories } from "@/components/landingSections/Categories";
+import { Hero } from "@/components/landingSections/Hero";
+import { InquirySection } from "@/components/landingSections/InquirySection";
+import { Occasions } from "@/components/landingSections/Occasions";
 import { Statistics } from "@/components/landingSections/Statistics";
 import { Testimonials } from "@/components/landingSections/Testimonials";
-import { InquirySection } from "@/components/landingSections/InquirySection";
+import { WhyChooseUs } from "@/components/landingSections/WhyChooseUs";
+import { Footer } from "@/components/layout/Footer";
+import { Navbar } from "@/components/layout/Navbar";
 import { FloatingActions } from "@/components/ui/FloatingActions";
-import { getBestSellers, getCategories, getOccasions } from "@/lib/placeholder-data/landing";
 import { connectDB } from "@/lib/mongoose";
+import { getBestSellers, getCategories, getOccasions } from "@/lib/placeholder-data/landing";
 
 export default async function LandingPage() {
-  // Server-rendered. Categories, Occasions, and Best Sellers use
-  // placeholder data here. Replace with server fetches when models are wired:
   await connectDB();
   const categories = await getCategories();
   const occasions = await getOccasions();
   const bestSellers = await getBestSellers(10);
-
+  const navbarCategories = categories.map((cat) => ({
+    name: cat.name,
+    slug: cat.slug,
+    _id: cat._id.toString(),
+  }));
   return (
     <>
-      <Navbar />
+      <Navbar categories={navbarCategories} />
       <main>
         <Hero />
         <Categories categories={categories} />
-        <Occasions />
-        <BestSellers />
+        <Occasions occasions={occasions} />
+        <BestSellers {...{ products: bestSellers, bestSellers }} />
         <WhyChooseUs />
         <Statistics />
         <Testimonials />
         <InquirySection />
       </main>
-      <Footer />
+      <Footer categories={categories} />
       <FloatingActions />
     </>
   );

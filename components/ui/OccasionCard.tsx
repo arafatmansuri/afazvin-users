@@ -1,16 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-
-export interface OccasionCardData {
-  id: string;
-  name: string;
-  slug: string;
-  image: string;
-}
+import { IOccasion } from "@/types";
 
 interface OccasionCardProps {
-  occasion: OccasionCardData;
+  occasion: IOccasion;
   className?: string;
 }
 

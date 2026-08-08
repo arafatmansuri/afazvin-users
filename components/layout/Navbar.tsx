@@ -1,25 +1,17 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { Menu, X, ChevronDown } from "lucide-react";
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/Button";
+import { cn } from "@/lib/utils";
+import { ChevronDown, Menu, X } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
-const CATEGORIES = [
-  { name: "Blazers", slug: "blazers" },
-  { name: "Suit Sherwani", slug: "suit-sherwani" },
-  { name: "Indo Western", slug: "indo-western" },
-  { name: "Jodhpuri", slug: "jodhpuri" },
-  { name: "Fabrics", slug: "fabrics" },
-  { name: "Readymade Garments", slug: "readymade-garments" },
-  { name: "Ethnic Wear", slug: "ethnic-wear" },
-  { name: "Koti Indo", slug: "koti-indo" },
-  { name: "Koti Kurta", slug: "koti-kurta" },
-];
+type NavbarProps = {
+  categories: { name: string; slug: string; _id: string }[];
+};
 
-export function Navbar() {
+export function Navbar({ categories }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [catsOpen, setCatsOpen] = useState(false);
@@ -46,10 +38,10 @@ export function Navbar() {
     <>
       <header
         className={cn(
-          "fixed top-0 inset-x-0 z-[100] transition-all duration-250 ease-[var(--ease-in-out-standard)]",
+          "fixed top-0 inset-x-0 z-100 transition-all duration-250 ease-(--ease-in-out-standard)",
           scrolled
-            ? "h-[72px] md:h-20 bg-secondary/95 backdrop-blur-sm shadow-xs"
-            : "h-[88px] md:h-[104px] bg-transparent",
+            ? "h-18 md:h-20 bg-secondary/95 backdrop-blur-sm shadow-xs"
+            : "h-22 md:h-26 bg-transparent",
         )}
       >
         <div className="container-xl h-full flex items-center justify-between gap-6">
@@ -106,9 +98,9 @@ export function Navbar() {
                   role="menu"
                   className="min-w-[240px] rounded-md bg-surface shadow-md py-2 border border-border"
                 >
-                  {CATEGORIES.map((cat) => (
+                  {categories.map((cat) => (
                     <Link
-                      key={cat.slug}
+                      key={cat._id.toString()}
                       href={`/categories/${cat.slug}`}
                       role="menuitem"
                       className="block px-5 py-2.5 text-sm text-text-primary hover:bg-background hover:text-primary transition-colors"
@@ -195,9 +187,9 @@ export function Navbar() {
 
           <nav className="flex-1 overflow-y-auto px-5 py-6 space-y-1">
             <p className="type-eyebrow text-accent mb-3 px-2">Categories</p>
-            {CATEGORIES.map((cat) => (
+            {categories.map((cat) => (
               <Link
-                key={cat.slug}
+                key={cat._id.toString()}
                 href={`/categories/${cat.slug}`}
                 className="block px-2 py-3 text-base text-text-inverse/90 hover:text-accent transition-colors"
                 onClick={() => setMobileOpen(false)}

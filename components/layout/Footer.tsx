@@ -1,18 +1,19 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Mail, Phone, MessageCircle } from "lucide-react";
+import { ICategory } from "@/types";
 
-const CATEGORIES = [
-  { name: "Blazers", slug: "blazers" },
-  { name: "Suit Sherwani", slug: "suit-sherwani" },
-  { name: "Indo Western", slug: "indo-western" },
-  { name: "Jodhpuri", slug: "jodhpuri" },
-  { name: "Fabrics", slug: "fabrics" },
-  { name: "Readymade Garments", slug: "readymade-garments" },
-  { name: "Ethnic Wear", slug: "ethnic-wear" },
-  { name: "Koti Indo", slug: "koti-indo" },
-  { name: "Koti Kurta", slug: "koti-kurta" },
-];
+// const CATEGORIES = [
+//   { name: "Blazers", slug: "blazers" },
+//   { name: "Suit Sherwani", slug: "suit-sherwani" },
+//   { name: "Indo Western", slug: "indo-western" },
+//   { name: "Jodhpuri", slug: "jodhpuri" },
+//   { name: "Fabrics", slug: "fabrics" },
+//   { name: "Readymade Garments", slug: "readymade-garments" },
+//   { name: "Ethnic Wear", slug: "ethnic-wear" },
+//   { name: "Koti Indo", slug: "koti-indo" },
+//   { name: "Koti Kurta", slug: "koti-kurta" },
+// ];
 
 const QUICK_LINKS = [
   { name: "About Us", href: "/about" },
@@ -20,7 +21,7 @@ const QUICK_LINKS = [
   { name: "FAQs", href: "/faq" },
 ];
 
-export function Footer() {
+export function Footer({ categories }: { categories: ICategory[] }) {
   return (
     <footer className="bg-secondary text-text-inverse">
       <div className="container-xl pt-16 md:pt-20 pb-10">
@@ -46,8 +47,8 @@ export function Footer() {
           <div>
             <h4 className="type-eyebrow text-accent mb-5">Categories</h4>
             <ul className="space-y-2.5">
-              {CATEGORIES.map((cat) => (
-                <li key={cat.slug}>
+              {categories.map((cat) => (
+                <li key={cat._id.toString()}>
                   <Link
                     href={`/categories/${cat.slug}`}
                     className="text-sm text-text-inverse/75 hover:text-accent transition-colors duration-200"

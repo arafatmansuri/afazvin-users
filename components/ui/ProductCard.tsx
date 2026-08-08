@@ -2,20 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { Eye } from "lucide-react";
 import { cn } from "@/lib/utils";
-
-export interface ProductCardData {
-  id: string;
-  name: string;
-  slug: string;
-  image: string;
-  hoverImage?: string;
-  price?: number | null;
-  views?: number;
-  category?: string;
-}
+import { IProduct } from "@/types";
 
 interface ProductCardProps {
-  product: ProductCardData;
+  product: IProduct;
   className?: string;
 }
 
@@ -30,8 +20,8 @@ export function ProductCard({ product, className }: ProductCardProps) {
     >
       <div className="relative aspect-4/5 overflow-hidden bg-surface">
         <Image
-          src={product.image}
-          alt={product.name}
+          src={product.thumbnailImage}
+          alt={product.thumbnailImageAlt || product.name}
           fill
           sizes="(max-width: 768px) 85vw, (max-width: 1024px) 45vw, 25vw"
           className={cn(

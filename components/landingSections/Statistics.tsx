@@ -21,6 +21,7 @@ function useCountUp(target: number, duration = 1800, start: boolean) {
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     if (prefersReduced) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setCount(target);
       return;
     }

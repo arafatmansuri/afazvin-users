@@ -70,7 +70,7 @@ import { ICategory } from "@/types";
 // ];
 
 interface CategoriesProps {
-  categories?: ICategory[];
+  categories: ICategory[];
 }
 
 export function Categories({
@@ -86,7 +86,7 @@ export function Categories({
         />
 
         <ScrollCarousel>
-          {categories && categories.map((cat) => (
+          {categories.map((cat) => (
             <CategoryCard
               key={cat._id.toString()}
               category={cat}

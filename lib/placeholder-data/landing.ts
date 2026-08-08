@@ -37,7 +37,7 @@ export interface Testimonial {
 }
 
 export async function getCategories(): Promise<ICategory[]> {
-  return await Category.find();
+  return await Category.find().lean();
 }
 
 export async function getOccasions(): Promise<IOccasion[]> {
