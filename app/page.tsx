@@ -14,17 +14,13 @@ import { getBestSellers, getCategories, getOccasions } from "@/lib/placeholder-d
 
 export default async function LandingPage() {
   await connectDB();
-  const categories = await getCategories();
+  const categoriesWithGeneral = await getCategories();
+  const categories = categoriesWithGeneral.filter((cat) => cat.slug !== "general");
   const occasions = await getOccasions();
   const bestSellers = await getBestSellers(10);
-  const navbarCategories = categories.map((cat) => ({
-    name: cat.name,
-    slug: cat.slug,
-    _id: cat._id.toString(),
-  }));
   return (
     <>
-      <Navbar categories={navbarCategories} />
+      <Navbar categories={categories.map((cat) => ({ name: cat.name, slug: cat.slug, _id: cat._id.toString() }))} />
       <main>
         <Hero />
         <Categories categories={categories} />
@@ -33,7 +29,7 @@ export default async function LandingPage() {
         <WhyChooseUs />
         <Statistics />
         <Testimonials />
-        <InquirySection />
+        <InquirySection categories={categoriesWithGeneral} />
       </main>
       <Footer categories={categories} />
       <FloatingActions />

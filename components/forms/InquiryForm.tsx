@@ -26,11 +26,13 @@ const CATEGORY_OPTIONS = [
 interface InquiryFormProps {
   defaultCategory?: string;
   className?: string;
+  categories: { name: string; slug: string; _id: string }[];
 }
 
 export function InquiryForm({
-  defaultCategory = "General",
+  defaultCategory = "6a76fc1369d1f8dfe00c0a8f",
   className,
+  categories
 }: InquiryFormProps) {
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
@@ -79,34 +81,6 @@ export function InquiryForm({
 
   return (
     <div className={cn("relative", className)}>
-      {status === "success" && (
-        <div
-          role="status"
-          className="mb-6 flex items-start gap-3 rounded-md border border-success/30 bg-success/10 px-4 py-3 text-sm text-success"
-        >
-          <CheckCircle2 className="h-5 w-5 shrink-0 mt-0.5" strokeWidth={1.5} />
-          <div>
-            <p className="font-medium">Inquiry submitted successfully</p>
-            <p className="mt-0.5 opacity-90">
-              We’ll get back to you within one business day.
-            </p>
-          </div>
-        </div>
-      )}
-
-      {status === "error" && (
-        <div
-          role="alert"
-          className="mb-6 flex items-start gap-3 rounded-md border border-error/30 bg-error/10 px-4 py-3 text-sm text-error"
-        >
-          <AlertCircle className="h-5 w-5 shrink-0 mt-0.5" strokeWidth={1.5} />
-          <div>
-            <p className="font-medium">Couldn’t submit inquiry</p>
-            <p className="mt-0.5 opacity-90">{errorMessage}</p>
-          </div>
-        </div>
-      )}
-
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6" noValidate>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <Field label="Name" required error={errors.name?.message}>
@@ -138,9 +112,9 @@ export function InquiryForm({
               )}
               aria-invalid={!!errors.category}
             >
-              {CATEGORY_OPTIONS.map((opt) => (
-                <option key={opt} value={opt}>
-                  {opt}
+              {categories.map((cat) => (
+                <option key={cat._id} value={cat._id}>
+                  {cat.name}
                 </option>
               ))}
             </select>
@@ -179,7 +153,39 @@ export function InquiryForm({
             aria-invalid={!!errors.message}
           />
         </Field>
+        {status === "success" && (
+          <div
+            role="status"
+            className="mb-6 flex items-start gap-3 rounded-md border border-success/30 bg-success/10 px-4 py-3 text-sm text-success"
+          >
+            <CheckCircle2
+              className="h-5 w-5 shrink-0 mt-0.5"
+              strokeWidth={1.5}
+            />
+            <div>
+              <p className="font-medium">Inquiry submitted successfully</p>
+              <p className="mt-0.5 opacity-90">
+                We’ll get back to you within one business day.
+              </p>
+            </div>
+          </div>
+        )}
 
+        {status === "error" && (
+          <div
+            role="alert"
+            className="mb-6 flex items-start gap-3 rounded-md border border-error/30 bg-error/10 px-4 py-3 text-sm text-error"
+          >
+            <AlertCircle
+              className="h-5 w-5 shrink-0 mt-0.5"
+              strokeWidth={1.5}
+            />
+            <div>
+              <p className="font-medium">Couldn’t submit inquiry</p>
+              <p className="mt-0.5 opacity-90">{errorMessage}</p>
+            </div>
+          </div>
+        )}
         <Button
           type="submit"
           variant="primary"

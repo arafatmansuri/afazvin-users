@@ -1,8 +1,9 @@
-import Image from "next/image";
-import { SectionHeader } from "@/components/ui/SectionHeader";
 import { InquiryForm } from "@/components/forms/InquiryForm";
+import { SectionHeader } from "@/components/ui/SectionHeader";
+import { ICategory } from "@/types";
+import Image from "next/image";
 
-export function InquirySection() {
+export function InquirySection({ categories }: { categories: ICategory[] }) {
   return (
     <section id="inquiry" className="section-padding bg-surface">
       <div className="container-xl">
@@ -29,7 +30,14 @@ export function InquirySection() {
 
           <div className="lg:col-span-3">
             <div className="rounded-lg bg-background p-6 md:p-10 shadow-md border border-border/60">
-              <InquiryForm defaultCategory="General" />
+              <InquiryForm
+                defaultCategory="6a76fc1369d1f8dfe00c0a8f"
+                categories={categories.map((cat) => ({
+                  name: cat.name,
+                  slug: cat.slug,
+                  _id: cat._id.toString(),
+                }))}
+              />
             </div>
           </div>
         </div>
