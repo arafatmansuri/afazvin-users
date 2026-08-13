@@ -1,7 +1,10 @@
 import mongoose from "mongoose";
+import { cacheLife } from "next/cache";
 import dns from "node:dns/promises";
 dns.setServers(["1.1.1.1", "1.0.0.1"]);
 const connectDB = async () => {
+  "use cache";
+  cacheLife("days");
   try {
     await mongoose.connect(
       <string>`${process.env.MONGODB_URI}/${process.env.DB_NAME}`,

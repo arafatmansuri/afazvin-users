@@ -1,6 +1,6 @@
 import Occasion from "@/models/occasion.model";
 import dotenv from "dotenv";
-import { connectDB } from "../mongoose";
+import { connectDB } from "./index";
 dotenv.config();
 
 async function addOccasions() {
@@ -57,7 +57,7 @@ async function getOccasions() {
   console.log("Occasions:", Occasions);
 }
 
-addOccasions()
+getOccasions()
   .then(() => {
     console.log("Occasions added successfully");
     process.exit(0);

@@ -1,6 +1,6 @@
 import Category from "@/models/category.model";
 import dotenv from "dotenv";
-import { connectDB } from "../mongoose";
+import { connectDB } from "./index";
 dotenv.config();
 
 async function addCategories() {
@@ -71,7 +71,7 @@ async function getCategories() {
   console.log("Categories:", categories);
 }
 
-addCategories()
+getCategories()
   .then(() => {
     console.log("Categories added successfully");
     process.exit(0);

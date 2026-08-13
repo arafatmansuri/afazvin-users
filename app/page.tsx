@@ -10,17 +10,29 @@ import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
 import { FloatingActions } from "@/components/ui/FloatingActions";
 import { connectDB } from "@/lib/mongoose";
-import { getBestSellers, getCategories, getOccasions } from "@/lib/placeholder-data/landing";
+import {
+  getBestSellers,
+  getCategories,
+  getOccasions,
+} from "@/lib/placeholder-data/landing";
 
 export default async function LandingPage() {
   await connectDB();
   const categoriesWithGeneral = await getCategories();
-  const categories = categoriesWithGeneral.filter((cat) => cat.slug !== "general");
+  const categories = categoriesWithGeneral.filter(
+    (cat) => cat.slug !== "general",
+  );
   const occasions = await getOccasions();
   const bestSellers = await getBestSellers(10);
   return (
     <>
-      <Navbar categories={categories.map((cat) => ({ name: cat.name, slug: cat.slug, _id: cat._id.toString() }))} />
+      <Navbar
+        categories={categories.map((cat) => ({
+          name: cat.name,
+          slug: cat.slug,
+          _id: cat._id,
+        }))}
+      />
       <main>
         <Hero />
         <Categories categories={categories} />

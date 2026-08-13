@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Eye } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { IProduct } from "@/types";
+import { IProduct } from "@/types/product";
 
 interface ProductCardProps {
   product: IProduct;

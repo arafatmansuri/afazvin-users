@@ -57,9 +57,30 @@ const productSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    isHandPicked: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true },
 );
+
+productSchema.index({
+  createdAt: -1,
+  _id: -1,
+});
+
+productSchema.index({
+  views: -1,
+  createdAt: -1,
+  _id: -1,
+});
+
+productSchema.index({
+  isBestSeller: -1,
+  createdAt: -1,
+  _id: -1,
+});
 
 const Product = mongoose.model("Cloths", productSchema);
 

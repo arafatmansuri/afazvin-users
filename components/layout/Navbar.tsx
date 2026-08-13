@@ -64,7 +64,13 @@ export function Navbar({ categories }: NavbarProps) {
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden lg:flex items-center gap-10">
+          <nav className="hidden lg:flex items-center gap-7">
+            <Link
+              href="/products"
+              className="type-eyebrow text-text-inverse/90 hover:text-accent transition-colors duration-200"
+            >
+              Products
+            </Link>
             <div
               className="relative"
               onMouseEnter={() => setCatsOpen(true)}

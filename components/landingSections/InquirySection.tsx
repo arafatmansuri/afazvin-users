@@ -1,9 +1,12 @@
 import { InquiryForm } from "@/components/forms/InquiryForm";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { ICategory } from "@/types";
+import { cacheLife } from "next/cache";
 import Image from "next/image";
 
-export function InquirySection({ categories }: { categories: ICategory[] }) {
+export async function InquirySection({ categories }: { categories: ICategory[] }) {
+  "use cache";
+  cacheLife("days");
   return (
     <section id="inquiry" className="section-padding bg-surface">
       <div className="container-xl">

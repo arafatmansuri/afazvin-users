@@ -39,6 +39,7 @@ const TESTIMONIALS = [
 ];
 
 export function Testimonials() {
+
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const [fading, setFading] = useState(false);

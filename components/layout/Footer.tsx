@@ -2,6 +2,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { Mail, Phone, MessageCircle } from "lucide-react";
 import { ICategory } from "@/types";
+import { CurrentYear } from "../landingSections/CurrentYear";
+import { Suspense } from "react";
 
 // const CATEGORIES = [
 //   { name: "Blazers", slug: "blazers" },
@@ -151,9 +153,9 @@ export function Footer({ categories }: { categories: ICategory[] }) {
         </div>
 
         <div className="mt-14 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-xs text-text-inverse/50">
-            © {new Date().getFullYear()} Afazvin. All rights reserved.
-          </p>
+          <Suspense fallback={<span className="text-xs text-text-inverse/50">Loading...</span>}>
+          <CurrentYear/>
+          </Suspense>
           <p className="text-xs text-text-inverse/50">
             Wholesale Menswear Manufacturer
           </p>

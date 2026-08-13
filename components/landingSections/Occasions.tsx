@@ -1,6 +1,7 @@
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { OccasionCard } from "@/components/ui/OccasionCard";
 import { IOccasion } from "@/types";
+import { cacheLife } from "next/cache";
 
 // const PLACEHOLDER_OCCASIONS: IOccasion[] = [
 //   {
@@ -58,9 +59,11 @@ interface OccasionsProps {
   occasions: IOccasion[];
 }
 
-export function Occasions({
+export async function Occasions({
   occasions,
 }: OccasionsProps) {
+  "use cache";
+  cacheLife("days");
   return (
     <section className="section-padding bg-surface">
       <div className="container-xl">

@@ -2,7 +2,8 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 import { ProductCard } from "@/components/ui/ProductCard";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { IProduct } from "@/types";
+import { IProduct } from "@/types/product";
+import { cacheLife } from "next/cache";
 
 // const PLACEHOLDER_PRODUCTS: IProduct[] = [
 //   {
@@ -79,9 +80,11 @@ interface BestSellersProps {
   products: IProduct[];
 }
 
-export function BestSellers({
+export async function BestSellers({
   products,
 }: BestSellersProps) {
+  "use cache";
+  cacheLife("days");
   return (
     <section className="section-padding bg-background">
       <div className="container-xl">

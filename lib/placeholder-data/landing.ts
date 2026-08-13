@@ -1,17 +1,10 @@
 import Category from "@/models/category.model";
-import Product from "@/models/product.model";
 import Occasion from "@/models/occasion.model";
-import { IOccasion, IProduct, type ICategory } from "@/types";
+import Product from "@/models/product.model";
+import { IProduct } from "@/types/product";
+import { ICategory,IOccasion } from "@/types";
 
-export interface Product {
-  id: string;
-  name: string;
-  slug: string;
-  image: string;
-  hoverImage: string;
-  price?: string;
-  views?: number;
-}
+import { cacheLife } from "next/cache";
 
 export interface Feature {
   id: string;
@@ -37,15 +30,38 @@ export interface Testimonial {
 }
 
 export async function getCategories(): Promise<ICategory[]> {
-  return await Category.find().lean();
+  "use cache";
+  cacheLife("days");
+  const categories = await Category.find().lean();
+  return categories.map((cat) => ({
+    ...cat,
+    _id: cat._id.toString(),
+  }));
 }
 
 export async function getOccasions(): Promise<IOccasion[]> {
-  return await Occasion.find();
+  "use cache";
+  cacheLife("days");
+  const occasions = await Occasion.find().lean();
+  return occasions.map((occasion) => ({
+    ...occasion,
+    _id: occasion._id.toString(),
+  }));
 }
 
-export async function getBestSellers(limit:number): Promise<IProduct[]> {
-  return await Product.find({ isBestSeller: true }).sort({ views: -1 }).limit(limit);
+export async function getBestSellers(limit: number): Promise<IProduct[]> {
+  "use cache";
+  cacheLife("days");
+  const bestSellers = await Product.find({ isBestSeller: true })
+    .sort({ views: -1 })
+    .limit(limit)
+    .lean();
+  return bestSellers.map((product) => ({
+    ...product,
+    _id: product._id.toString(),
+    category: product.category.toString(),
+    occasion: product.occasion ? product.occasion.toString() : null,
+  }));
 }
 
 export function getWhyChooseUs(): Feature[] {

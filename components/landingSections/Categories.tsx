@@ -2,6 +2,7 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 import { CategoryCard } from "@/components/ui/CategoryCard";
 import { ScrollCarousel } from "../ui/ScrollCarousel";
 import { ICategory } from "@/types";
+import { cacheLife } from "next/cache";
 
 // const PLACEHOLDER_CATEGORIES: CategoryCardData[] = [
 //   // {
@@ -73,9 +74,11 @@ interface CategoriesProps {
   categories: ICategory[];
 }
 
-export function Categories({
+export async function Categories({
   categories,
 }: CategoriesProps) {
+  "use cache";
+  cacheLife("days");
   return (
     <section id="categories" className="section-padding bg-background">
       <div className="container-xl">

@@ -1,5 +1,6 @@
 import { Factory, MapPin, ShieldCheck, Truck } from "lucide-react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { cacheLife } from "next/cache";
 
 const FEATURES = [
   {
@@ -28,7 +29,9 @@ const FEATURES = [
   },
 ];
 
-export function WhyChooseUs() {
+export async function WhyChooseUs() {
+  "use cache";
+  cacheLife("days");
   return (
     <section className="section-padding bg-surface">
       <div className="container-xl">
