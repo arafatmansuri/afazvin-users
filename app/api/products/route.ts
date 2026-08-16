@@ -2,8 +2,9 @@ import { apiHandler } from "@/lib/apiHandler";
 import { successResponse } from "@/lib/apiResponse";
 import { AppError } from "@/lib/appError";
 import { connectDB } from "@/lib/mongoose";
-import Product from "@/models/product.model";
-import { Types } from "mongoose";
+import Occasion from "@/models/occasion.model";
+import Category from "@/models/category.model";
+import { default as Product } from "@/models/product.model";
 
 const LIMIT = 20;
 
@@ -13,7 +14,6 @@ export const GET = apiHandler({
   GET: async (req: Request) => {
     const url = new URL(req.url);
     const searchParams = url.searchParams;
-
     const category = searchParams.get("category");
     const occasion = searchParams.get("occasion");
     const sortParam = searchParams.get("sort");
@@ -27,22 +27,6 @@ export const GET = apiHandler({
 
     const filter: Record<string, unknown> = {};
 
-    if (category) {
-      if (!Types.ObjectId.isValid(category)) {
-        throw AppError.badRequest("Invalid category");
-      }
-
-      filter.category = new Types.ObjectId(category);
-    }
-
-    if (occasion) {
-      if (!Types.ObjectId.isValid(occasion)) {
-        throw AppError.badRequest("Invalid occasion");
-      }
-
-      filter.occasion = new Types.ObjectId(occasion);
-    }
-
     if (sort === "hand-picked") {
       filter.isHandPicked = true;
     }
@@ -53,6 +37,21 @@ export const GET = apiHandler({
 
     await connectDB();
 
+    if (category) {
+      const categoryObj = await Category.findOne({ slug: category });
+      if (categoryObj === null) {
+        throw AppError.badRequest("Invalid category");
+      }
+      filter.category = categoryObj._id;
+    }
+
+    if (occasion) {
+      const occasionObj = await Occasion.findOne({ slug: occasion });
+      if (occasionObj === null) {
+        throw AppError.badRequest("Invalid occasion");
+      }
+      filter.occasion = occasionObj._id;
+    }
     const skip = (page - 1) * LIMIT;
 
     const [products, total] = await Promise.all([

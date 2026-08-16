@@ -82,6 +82,7 @@ productSchema.index({
   _id: -1,
 });
 
-const Product = mongoose.model("Cloths", productSchema);
+const Product =
+  mongoose.models.Cloths || mongoose.model("Cloths", productSchema);
 
 export default Product;

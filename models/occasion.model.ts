@@ -23,6 +23,7 @@ const occasionSchema = new mongoose.Schema(
   { timestamps: true },
 );
 
-const Occasion = mongoose.model("Occasion", occasionSchema);
+const Occasion =
+  mongoose.models.Occasion || mongoose.model("Occasion", occasionSchema);
 
 export default Occasion;

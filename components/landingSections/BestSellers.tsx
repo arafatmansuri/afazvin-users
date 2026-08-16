@@ -111,7 +111,7 @@ export async function BestSellers({
         </div>
         <div className="mt-8 md:mt-10 flex justify-center">
           <Link
-            href="/products"
+            href="/clothing?sort=best-sellers"
             className="group inline-flex items-center gap-2 text-sm font-semibold tracking-wide uppercase text-primary hover:text-primary-hover transition-colors duration-200"
           >
             Explore All
