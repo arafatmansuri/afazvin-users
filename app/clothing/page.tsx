@@ -27,13 +27,13 @@ export default async function ClothingPage({
 }) {
   const params = await searchParams;
   await connectDB();
-  const { filters, skip, slugs } = await getProductsFilter({
+  const { filters, skip, slugs,page } = await getProductsFilter({
     searchParams: new URLSearchParams(params as Record<string, string>),
     usedBy: "client",
   });
   const categories = await getCategories();
   const occasions = await getOccasions();
-  const initialData = await getProducts(filters, skip);
+  const initialData = await getProducts(filters, skip,"client", page);
   return (
     <>
       <Navbar categories={categories} />

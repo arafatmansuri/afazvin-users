@@ -96,6 +96,8 @@ export const useFetchProductsInfinite = (
         }
       : undefined,
 
+    staleTime: 5 * 60 * 1000, // 5 minutes
+
     getNextPageParam: (lastPage) => {
       const data = lastPage.data;
 

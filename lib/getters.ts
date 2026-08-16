@@ -19,7 +19,7 @@ export async function findCategoryBySlug(
 ): Promise<ICategory | null> {
     "use cache";
     cacheLife("days");
-  await connectDB();
+  // await connectDB();
   const category = await Category.findOne({ slug }).lean();
   if (!category) {
     return null;
@@ -41,7 +41,7 @@ export async function findOccasionBySlug(
 ): Promise<IOccasion | null> {
     "use cache";
     cacheLife("days");
-  await connectDB();
+  // await connectDB();
   const occasion = await Occasion.findOne({ slug }).lean();
   if (!occasion) {
     return null;

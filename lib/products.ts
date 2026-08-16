@@ -5,8 +5,9 @@ import {
   ProductListResult,
   ProductSort,
 } from "@/types/product";
-import { findCategoryBySlug, findOccasionBySlug } from "./getters";
 import { connection } from "next/server";
+import { AppError } from "./appError";
+import { findCategoryBySlug, findOccasionBySlug } from "./getters";
 
 const LIMIT = 20;
 
@@ -15,6 +16,8 @@ const validSorts = ["hand-picked", "best-sellers", "new", "popular"] as const;
 export async function getProducts(
   filters: ProductListParams = {},
   skip: number = 0,
+  usedBy: "route" | "client" = "route",
+  page: number = 1,
 ): Promise<APIResponse<ProductListResult>> {
   await connection();
   const [products, total] = await Promise.all([
@@ -43,7 +46,7 @@ export async function getProducts(
     Product.countDocuments(filters),
   ]);
   const totalPages = Math.ceil(total / LIMIT);
-  const hasMore = (filters.page || 1) * LIMIT < total;
+  const hasMore = (page || 1) * LIMIT < total;
   const refinedProducts = products.map((product) => ({
     ...product,
     _id: product._id.toString(),
@@ -51,40 +54,12 @@ export async function getProducts(
     occasion: product.occasion?.toString() || null,
   }));
   return successResponse("Products fetched", {
-    products: refinedProducts,
+    products: usedBy == "client" ? refinedProducts : products,
     total,
     totalPages,
-    page: filters.page || 1,
+    page: page || 1,
     hasMore: total === 0 ? false : hasMore,
   });
-}
-
-export function parseProductSearchParams(
-  searchParams: Record<string, string | string[] | undefined>,
-): ProductListParams {
-  const get = (key: string) => {
-    const v = searchParams[key];
-    return typeof v === "string" && v.length > 0 ? v : undefined;
-  };
-
-  const sortRaw = get("sort");
-  const validSorts: ProductSort[] = [
-    "hand-picked",
-    "best-sellers",
-    "new",
-    "popular",
-  ];
-  const sort =
-    sortRaw && validSorts.includes(sortRaw as ProductSort)
-      ? (sortRaw as ProductSort)
-      : undefined;
-
-  return {
-    category: get("category"),
-    occasion: get("occasion"),
-    sort,
-    page: 1,
-  };
 }
 export async function getProductsFilter({
   searchParams,
@@ -103,20 +78,23 @@ export async function getProductsFilter({
   const occasion = searchParams.get("occasion");
   const sortParam = searchParams.get("sort");
   const pageParam = searchParams.get("page");
-
   const page = Math.max(1, Number.parseInt(pageParam || "1", 10) || 1);
-
   const sort = validSorts.includes(sortParam as (typeof validSorts)[number])
     ? sortParam
     : "new";
 
   const filter: Record<string, unknown> = {};
+  if (sort === "hand-picked") filter.isHandPicked = true;
+  if (sort === "best-sellers") filter.isBestSeller = true;
   const slugs: Record<string, string> = {};
   if (category) {
     const categoryObj = await findCategoryBySlug(category);
     if (categoryObj && categoryObj.slug) {
       filter.category = categoryObj._id;
       slugs.category = categoryObj.slug;
+    }
+    if (categoryObj === null && usedBy === "route") {
+      throw AppError.badRequest("Invalid category");
     }
   }
 
@@ -126,9 +104,10 @@ export async function getProductsFilter({
       filter.occasion = occasionObj._id;
       slugs.occasion = occasionObj.slug;
     }
+    if (occasionObj === null && usedBy === "route") {
+      throw AppError.badRequest("Invalid occasion");
+    }
   }
-  if (sort === "hand-picked") filter.isHandPicked = true;
-  if (sort === "best-sellers") filter.isBestSeller = true;
   const skip = (page - 1) * LIMIT;
   return { filters: filter, sort: sort as ProductSort, page, skip, slugs };
 }
