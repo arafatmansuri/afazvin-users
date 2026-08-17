@@ -12,6 +12,7 @@ export function CategoryCard({ category, className }: CategoryCardProps) {
   return (
     <Link
       href={`/categories/${category.slug}`}
+      prefetch={false}
       className={cn(
         "group relative block aspect-4/5 overflow-hidden rounded-md bg-surface",
         className,
