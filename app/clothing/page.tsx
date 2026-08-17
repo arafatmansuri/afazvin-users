@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 type SearchParams = Promise<Record<string, string | string[] | undefined>>;
 
-export default function ClothingPage({
+export default async function ClothingPage({
   searchParams,
 }: {
   searchParams: SearchParams;
