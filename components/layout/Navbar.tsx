@@ -67,6 +67,7 @@ export function Navbar({ categories }: NavbarProps) {
           <nav className="hidden lg:flex items-center gap-7">
             <Link
               href="/clothing"
+              prefetch={true}
               className="type-eyebrow text-text-inverse/90 hover:text-accent transition-colors duration-200"
             >
               Products
