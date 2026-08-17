@@ -5,6 +5,7 @@ import { IProduct } from "@/types/product";
 import { ICategory,IOccasion } from "@/types";
 
 import { cacheLife } from "next/cache";
+import { connectDB } from "../mongoose";
 
 export interface Feature {
   id: string;
@@ -32,6 +33,7 @@ export interface Testimonial {
 export async function getCategories(): Promise<ICategory[]> {
   "use cache";
   cacheLife("days");
+  await connectDB();
   const categories = await Category.find().lean();
   return categories.map((cat) => ({
     ...cat,
@@ -42,6 +44,7 @@ export async function getCategories(): Promise<ICategory[]> {
 export async function getOccasions(): Promise<IOccasion[]> {
   "use cache";
   cacheLife("days");
+  await connectDB();
   const occasions = await Occasion.find().lean();
   return occasions.map((occasion) => ({
     ...occasion,
@@ -52,6 +55,7 @@ export async function getOccasions(): Promise<IOccasion[]> {
 export async function getBestSellers(limit: number): Promise<IProduct[]> {
   "use cache";
   cacheLife("days");
+  await connectDB();
   const bestSellers = await Product.find({ isBestSeller: true })
     .sort({ views: -1 })
     .limit(limit)

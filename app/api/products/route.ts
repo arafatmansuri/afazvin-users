@@ -1,13 +1,11 @@
 import { apiHandler } from "@/lib/apiHandler";
 import { successResponse } from "@/lib/apiResponse";
-import { connectDB } from "@/lib/mongoose";
 import { getProducts, getProductsFilter } from "@/lib/products";
 
 export const GET = apiHandler({
   GET: async (req: Request) => {
     const url = new URL(req.url);
     const searchParams = url.searchParams;
-    await connectDB();
     const {
       filters: filter,
       skip,

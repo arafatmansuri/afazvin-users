@@ -15,7 +15,6 @@ export default async function Cloths({
   searchParams: SearchParams;
 }) {
   const params = await searchParams;
-  await connectDB();
   const { filters, skip, slugs, page } = await getProductsFilter({
     searchParams: new URLSearchParams(params as Record<string, string>),
     usedBy: "client",

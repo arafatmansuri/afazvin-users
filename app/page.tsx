@@ -6,10 +6,6 @@ import { Occasions } from "@/components/landingSections/Occasions";
 import { Statistics } from "@/components/landingSections/Statistics";
 import { Testimonials } from "@/components/landingSections/Testimonials";
 import { WhyChooseUs } from "@/components/landingSections/WhyChooseUs";
-import { Footer } from "@/components/layout/Footer";
-import { Navbar } from "@/components/layout/Navbar";
-import { FloatingActions } from "@/components/ui/FloatingActions";
-import { connectDB } from "@/lib/mongoose";
 import {
   getBestSellers,
   getCategories,
@@ -17,7 +13,6 @@ import {
 } from "@/lib/placeholder-data/landing";
 
 export default async function LandingPage() {
-  await connectDB();
   const categoriesWithGeneral = await getCategories();
   const categories = categoriesWithGeneral.filter(
     (cat) => cat.slug !== "general",

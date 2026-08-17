@@ -1,12 +1,11 @@
+import { Footer } from "@/components/layout/Footer";
+import { Navbar } from "@/components/layout/Navbar";
+import { FloatingActions } from "@/components/ui/FloatingActions";
+import { getCategories } from "@/lib/placeholder-data/landing";
 import QueryProvider from "@/lib/react-query/provider";
-import "./globals.css";
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Inter } from "next/font/google";
-import { Navbar } from "@/components/layout/Navbar";
-import { getCategories } from "@/lib/placeholder-data/landing";
-import { connectDB } from "@/lib/mongoose";
-import { Footer } from "@/components/layout/Footer";
-import { FloatingActions } from "@/components/ui/FloatingActions";
+import "./globals.css";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -31,11 +30,10 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({ children }: LayoutProps<"/">) {
-  await connectDB();
   const categoriesWithGeneral = await getCategories();
-    const categories = categoriesWithGeneral.filter(
-      (cat) => cat.slug !== "general",
-    );
+  const categories = categoriesWithGeneral.filter(
+    (cat) => cat.slug !== "general",
+  );
   return (
     <html lang="en" className={`${inter.variable} ${cormorant.variable}`}>
       <body className="font-sans antialiased">

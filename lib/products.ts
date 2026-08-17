@@ -8,6 +8,7 @@ import {
 import { connection } from "next/server";
 import { AppError } from "./appError";
 import { findCategoryBySlug, findOccasionBySlug } from "./getters";
+import { connectDB } from "./mongoose";
 
 const LIMIT = 20;
 
@@ -20,6 +21,7 @@ export async function getProducts(
   page: number = 1,
 ): Promise<APIResponse<ProductListResult>> {
   await connection();
+  await connectDB();
   const [products, total] = await Promise.all([
     Product.find(filters)
       .sort(
