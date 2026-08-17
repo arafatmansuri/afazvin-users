@@ -147,7 +147,8 @@ export function Navbar({ categories }: NavbarProps) {
           {/* Mobile toggle — single close control when open */}
           <button
             type="button"
-            className="lg:hidden relative z-[110] flex h-11 w-11 items-center justify-center text-text-inverse"
+            className={`lg:hidden relative z-[110] flex h-11 w-11 items-center justify-center ${mobileOpen || scrolled ? "text-text-inverse": "text-text-primary"}
+            `}
             onClick={() => setMobileOpen((v) => !v)}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
