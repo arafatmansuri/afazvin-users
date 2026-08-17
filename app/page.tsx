@@ -26,13 +26,6 @@ export default async function LandingPage() {
   const bestSellers = await getBestSellers(10);
   return (
     <>
-      <Navbar
-        categories={categories.map((cat) => ({
-          name: cat.name,
-          slug: cat.slug,
-          _id: cat._id,
-        }))}
-      />
       <main>
         <Hero />
         <Categories categories={categories} />
@@ -43,8 +36,6 @@ export default async function LandingPage() {
         <Testimonials />
         <InquirySection categories={categoriesWithGeneral} />
       </main>
-      <Footer categories={categories} />
-      <FloatingActions />
     </>
   );
 }
