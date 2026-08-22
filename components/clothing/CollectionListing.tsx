@@ -5,7 +5,7 @@ import { ProductCard } from "@/components/ui/ProductCard";
 import { ProductSkeleton } from "@/components/ui/ProductSkeleton";
 import { APIResponse } from "@/lib/apiResponse";
 import { useFetchProductsInfinite } from "@/lib/react-query/mutations";
-import { IProduct, ProductListResult, ProductSort } from "@/types/product";
+import { ProductListResult, ProductSort } from "@/types/product";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef } from "react";
@@ -14,6 +14,7 @@ export type CollectionContext = {
   type: "category" | "occasion";
   slug: string;
   name: string;
+  description?: string | null;
 };
 
 interface CollectionListingProps {
@@ -103,7 +104,13 @@ export function CollectionListing({
 
   return (
     <div>
-      <DiscoveryControls value={sort} onChange={setSort} resultCount={total} />
+      <DiscoveryControls
+        value={sort}
+        onChange={setSort}
+        resultCount={total}
+        title={context.name}
+        description={context.description}
+      />
 
       {products.length === 0 && !query.isLoading ? (
         <div className="flex min-h-[320px] flex-col items-center justify-center gap-6 px-4 py-16 text-center">

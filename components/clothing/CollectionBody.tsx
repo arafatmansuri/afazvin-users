@@ -84,17 +84,7 @@ export default async function CollectionBody({
           ]}
           className="mb-6"
         />
-
-        <header className="mb-10 md:mb-12">
-          <h1 className="type-h1 text-text-primary">{entity.name}</h1>
-          {entity.description && (
-            <p className="mt-4 max-w-xl text-lg leading-relaxed text-text-secondary">
-              {entity.description}
-            </p>
-          )}
-        </header>
-
-        <div className="mb-12 md:mb-14">
+        <div className="mb-8 md:mb-6">
           <ContextNavigation items={navItems} activeSlug={entity.slug} />
         </div>
 
@@ -104,6 +94,7 @@ export default async function CollectionBody({
               type: entity.type,
               slug: entity.slug,
               name: entity.name,
+              description: entity.description,
             }}
             initialData={initialData}
             initialSort={initialSort}

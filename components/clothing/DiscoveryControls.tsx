@@ -10,12 +10,16 @@ interface DiscoveryControlsProps {
   value?: ProductSort;
   onChange: (sort: ProductSort | undefined) => void;
   resultCount: number;
+  title: string;
+  description?: string | null;
 }
 
 export function DiscoveryControls({
   value,
   onChange,
   resultCount,
+  title,
+  description,
 }: DiscoveryControlsProps) {
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
@@ -42,8 +46,9 @@ export function DiscoveryControls({
   const isActive = Boolean(value);
 
   return (
-    <div className="flex flex-wrap items-center justify-between gap-4">
-      <div ref={rootRef} className="relative">
+    <div className="flex flex-col gap-6 md:flex-row md:flex-wrap md:items-start md:justify-between md:gap-4">
+      {/* Sort control */}
+      <div ref={rootRef} className="relative order-2 md:order-1 shrink-0">
         <button
           type="button"
           aria-haspopup="listbox"
@@ -117,7 +122,18 @@ export function DiscoveryControls({
         )}
       </div>
 
-      <p className="text-sm text-text-secondary">
+      {/* Collection title + description (center) */}
+      <div className="order-1 md:order-2 flex-1 min-w-0 text-center px-2">
+        <h1 className="type-h1 text-text-primary">{title}</h1>
+        {description ? (
+          <p className="mt-2 mx-auto max-w-xl text-xs md:text-sm leading-relaxed text-text-secondary">
+            {description}
+          </p>
+        ) : null}
+      </div>
+
+      {/* Result count */}
+      <p className="order-3 text-sm text-text-secondary shrink-0 md:pt-2 md:text-right">
         <span className="text-text-primary tabular-nums">{resultCount}</span>
         {resultCount === 1 ? " Result" : " Results"}
       </p>
