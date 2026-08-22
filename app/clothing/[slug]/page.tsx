@@ -1,5 +1,5 @@
 import CollectionBody from "@/components/clothing/CollectionBody";
-import { ProductSkeleton, Skeleton } from "@/components/ui/ProductSkeleton";
+import { CategorySkeleton, ProductSkeleton, Skeleton } from "@/components/ui/ProductSkeleton";
 import { resolveCollectionSlug } from "@/constants/catalog";
 import { getCategories, getOccasions } from "@/lib/placeholder-data/landing";
 import type { Metadata } from "next";
@@ -39,7 +39,7 @@ export default async function CollectionPage({
   searchParams: SearchParams;
 }) {
   return (
-    <Suspense fallback={<Skeleton />}>
+    <Suspense fallback={<CategorySkeleton />}>
       <CollectionPageSuspense params={params} searchParams={searchParams} />
     </Suspense>
   );
@@ -54,8 +54,6 @@ export async function CollectionPageSuspense({
   const { slug } = await params;
 
   return (
-    <Suspense fallback={<ProductSkeleton />}>
       <CollectionBody slug={slug} searchParams={searchParams} />
-    </Suspense>
   );
 }

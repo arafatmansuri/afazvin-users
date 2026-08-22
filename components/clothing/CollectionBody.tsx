@@ -3,7 +3,7 @@ import { ContextNavigation } from "@/components/clothing/ContextNavigation";
 import { YouMayAlsoLike } from "@/components/clothing/YouMayAlsoLike";
 import { InquirySection } from "@/components/landingSections/InquirySection";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
-import { ProductSkeleton } from "@/components/ui/ProductSkeleton";
+import { ProductCardsSkeleton, ProductSkeleton } from "@/components/ui/ProductSkeleton";
 import { getContextNavItems, resolveCollectionSlug } from "@/constants/catalog";
 import { getCategories, getOccasions } from "@/lib/placeholder-data/landing";
 import { getProducts, getProductsFilter } from "@/lib/products";
@@ -98,7 +98,7 @@ export default async function CollectionBody({
           <ContextNavigation items={navItems} activeSlug={entity.slug} />
         </div>
 
-        <Suspense fallback={<ProductSkeleton />}>
+        <Suspense fallback={<ProductCardsSkeleton />}>
           <CollectionListing
             context={{
               type: entity.type,
