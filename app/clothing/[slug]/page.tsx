@@ -20,7 +20,7 @@ export async function generateMetadata({
   if (!entity) {
     return {
       title: "Collection | Afazvin Wholesale Menswear",
-      icons: { icon: "/favicon.png" },
+      icons: { icon: "/icon.png" }
     };
   }
   return {
@@ -28,7 +28,7 @@ export async function generateMetadata({
     description:
       entity.description ??
       `Browse our ${entity.name} menswear collection for wholesale partners.`,
-    icons: { icon: "/favicon.png" },
+    icons: { icon: "/icon.png" },
   };
 }
 
