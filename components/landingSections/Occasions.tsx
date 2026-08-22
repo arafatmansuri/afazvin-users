@@ -69,7 +69,7 @@ export async function Occasions({
       <div className="container-xl">
         <SectionHeader
           eyebrow="Shop by Occasion"
-          title="Dressed for Every Moment"
+          title="Dresses for Every Moment"
           description="Help your customers find the right silhouette for every celebration on their calendar."
         />
       </div>

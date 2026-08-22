@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: "Clothing | Afazvin Wholesale Menswear",
   description:
     "Browse the full Afazvin wholesale collection — blazers, sherwanis, Indo-western, Jodhpuri, ethnic wear and more for retail partners.",
+  icons: { icon: "/icon.png" },
 };
 
 type SearchParams = Promise<Record<string, string | string[] | undefined>>;
