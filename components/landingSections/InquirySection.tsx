@@ -4,7 +4,15 @@ import { ICategory } from "@/types";
 import { cacheLife } from "next/cache";
 import Image from "next/image";
 
-export async function InquirySection({ categories }: { categories: ICategory[] }) {
+export async function InquirySection(
+  {
+    categories,
+    defaultCategory,
+  }: { categories: ICategory[]; defaultCategory?: string } = {
+    categories: [],
+    defaultCategory: "6a76fc1369d1f8dfe00c0a8f",
+  },
+) {
   "use cache";
   cacheLife("days");
   return (
@@ -34,7 +42,7 @@ export async function InquirySection({ categories }: { categories: ICategory[] }
           <div className="lg:col-span-3">
             <div className="rounded-lg bg-background p-6 md:p-10 shadow-md border border-border/60">
               <InquiryForm
-                defaultCategory="6a76fc1369d1f8dfe00c0a8f"
+                defaultCategory={defaultCategory}
                 categories={categories.map((cat) => ({
                   name: cat.name,
                   slug: cat.slug,

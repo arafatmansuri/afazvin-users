@@ -52,7 +52,7 @@ export function Footer({ categories }: { categories: ICategory[] }) {
               {categories.map((cat) => (
                 <li key={cat._id.toString()}>
                   <Link
-                    href={`/categories/${cat.slug}`}
+                    href={`/clothing/${cat.slug}`}
                     className="text-sm text-text-inverse/75 hover:text-accent transition-colors duration-200"
                   >
                     {cat.name}

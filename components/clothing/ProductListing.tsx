@@ -41,7 +41,8 @@ function filtersFromSearchParams(params: URLSearchParams): ClothingFilters {
 function buildQueryString(filters: ClothingFilters) {
   const q = new URLSearchParams();
   if (filters.category) q.set("category", filters.category);
-  if (filters.occasion && filters.occasion !== "All") q.set("occasion", filters.occasion);
+  if (filters.occasion && filters.occasion !== "All")
+    q.set("occasion", filters.occasion);
   if (filters.sort) q.set("sort", filters.sort);
   const s = q.toString();
   return s ? `?${s}` : "";
@@ -108,7 +109,12 @@ export function ProductListing({
 
   return (
     <div>
-      <ProductFilters value={filters} onChange={setFilters} categories={categories} occasions={occasions} />
+      <ProductFilters
+        value={filters}
+        onChange={setFilters}
+        categories={categories}
+        occasions={occasions}
+      />
 
       <p className="mt-6 text-sm text-text-secondary">
         <span className="text-text-primary tabular-nums">{total}</span>

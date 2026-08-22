@@ -11,7 +11,7 @@ interface OccasionCardProps {
 export function OccasionCard({ occasion, className }: OccasionCardProps) {
   return (
     <Link
-      href={`/occasions/${occasion.slug}`}
+      href={`/clothing/${occasion.slug}`}
       prefetch={false}
       className={cn(
         "group relative block aspect-3/2 min-w-70 md:min-w-85 overflow-hidden rounded-md bg-surface snap-start",

@@ -108,7 +108,7 @@ export function Navbar({ categories }: NavbarProps) {
                   {categories.map((cat) => (
                     <Link
                       key={cat._id.toString()}
-                      href={`/categories/${cat.slug}`}
+                      href={`/clothing/${cat.slug}`}
                       role="menuitem"
                       className="block px-5 py-2.5 text-sm text-text-primary hover:bg-background hover:text-primary transition-colors"
                       onClick={() => setCatsOpen(false)}
@@ -148,7 +148,7 @@ export function Navbar({ categories }: NavbarProps) {
           {/* Mobile toggle — single close control when open */}
           <button
             type="button"
-            className={`lg:hidden relative z-[110] flex h-11 w-11 items-center justify-center ${mobileOpen || scrolled ? "text-text-inverse": "text-text-primary"}
+            className={`lg:hidden relative z-[110] flex h-11 w-11 items-center justify-center ${mobileOpen || !mobileOpen ? "text-text-inverse" : "text-text-primary"}
             `}
             onClick={() => setMobileOpen((v) => !v)}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
@@ -194,11 +194,18 @@ export function Navbar({ categories }: NavbarProps) {
           </div>
 
           <nav className="flex-1 overflow-y-auto px-5 py-6 space-y-1">
+            <Link
+              href="/clothing"
+              className="block px-2 py-3 text-base text-text-inverse/90 hover:text-accent transition-colors"
+              onClick={() => setMobileOpen(false)}
+            >
+              Products
+            </Link>
             <p className="type-eyebrow text-accent mb-3 px-2">Categories</p>
             {categories.map((cat) => (
               <Link
                 key={cat._id.toString()}
-                href={`/categories/${cat.slug}`}
+                href={`/clothing/${cat.slug}`}
                 className="block px-2 py-3 text-base text-text-inverse/90 hover:text-accent transition-colors"
                 onClick={() => setMobileOpen(false)}
               >

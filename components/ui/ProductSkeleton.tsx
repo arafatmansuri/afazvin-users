@@ -41,7 +41,14 @@ export function Skeleton() {
             </p>
           </header>
 
-          <ProductSkeleton />
+            {Array.from({ length: 4 }).map((_, i) => (
+              <ProductSkeleton
+                key={`sk-${i}`}
+                className={
+                  i >= 2 ? "max-md:hidden" : i >= 3 ? "md:max-lg:hidden" : ""
+                }
+              />
+            ))}
         </div>
       </main>
     </>

@@ -2,7 +2,6 @@ import { ProductListing } from "@/components/clothing/ProductListing";
 import { InquirySection } from "@/components/landingSections/InquirySection";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { ProductSkeleton } from "@/components/ui/ProductSkeleton";
-import { connectDB } from "@/lib/mongoose";
 import { getCategories, getOccasions } from "@/lib/placeholder-data/landing";
 import { getProducts, getProductsFilter } from "@/lib/products";
 import { Suspense } from "react";
