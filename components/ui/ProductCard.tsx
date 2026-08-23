@@ -13,7 +13,6 @@ export function ProductCard({ product, className }: ProductCardProps) {
   return (
     <Link
       href={`/products/${product.slug}`}
-      prefetch={false}
       className={cn(
         "group block rounded-md overflow-hidden bg-surface transition-shadow duration-300 hover:shadow-sm",
         className,

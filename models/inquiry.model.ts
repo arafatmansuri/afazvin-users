@@ -14,6 +14,10 @@ const inquirySchema = new mongoose.Schema(
       Ref: "Category",
       type: mongoose.Schema.Types.ObjectId,
     },
+    product:{
+      Ref: "Product",
+      type: mongoose.Schema.Types.ObjectId,
+    },
     mobile: {
       type: String,
       required: true,
@@ -22,6 +26,11 @@ const inquirySchema = new mongoose.Schema(
       type: String,
     },
     message: String,
+    type:{
+      type: String,
+      enum: ["generalInquiry", "productInquiry"],
+      required: true,
+    }
   },
   { timestamps: true },
 );

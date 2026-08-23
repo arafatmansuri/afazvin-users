@@ -10,19 +10,6 @@ import { AlertCircle, CheckCircle2 } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
-const CATEGORY_OPTIONS = [
-  "General",
-  "Blazers",
-  "Suit Sherwani",
-  "Indo Western",
-  "Jodhpuri",
-  "Fabrics",
-  "Readymade Garments",
-  "Ethnic Wear",
-  "Koti Indo",
-  "Koti Kurta",
-];
-
 interface InquiryFormProps {
   defaultCategory?: string;
   className?: string;
