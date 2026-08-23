@@ -1,14 +1,17 @@
 import { APIResponse, successResponse } from "@/lib/apiResponse";
 import Product from "@/models/product.model";
+import { ICategory, IOccasion } from "@/types";
 import {
+  IProduct,
   ProductListParams,
   ProductListResult,
   ProductSort,
 } from "@/types/product";
 import { connection } from "next/server";
 import { AppError } from "./appError";
-import { findCategoryBySlug, findOccasionBySlug } from "./getters";
+import { findCategoryById, findCategoryBySlug, findOccasionById, findOccasionBySlug, getProductBySlug } from "./getters";
 import { connectDB } from "./mongoose";
+import { cacheLife } from "next/cache";
 
 const LIMIT = 20;
 
@@ -112,4 +115,27 @@ export async function getProductsFilter({
   }
   const skip = (page - 1) * LIMIT;
   return { filters: filter, sort: sort as ProductSort, page, skip, slugs };
+}
+export async function getProductDetails(
+  slug: string,
+): Promise<{
+  product: IProduct;
+  category: ICategory | null;
+  occasion: IOccasion | null;
+} | null> {
+  "use cache";
+  cacheLife("days");
+  await connectDB();
+  const product = await getProductBySlug(slug);
+  if (!product) {
+    return null;
+  }
+  const category = await findCategoryById(product.category);
+  if (!category) {
+    return null;
+  }
+  const occasion = product.occasion
+    ? await findOccasionById(product.occasion)
+    : null;
+  return { product, category, occasion };
 }

@@ -1,9 +1,8 @@
 import Category from "@/models/category.model";
 import Occasion from "@/models/occasion.model";
 import Product from "@/models/product.model";
+import { ICategory, IOccasion } from "@/types";
 import { IProduct } from "@/types/product";
-import { ICategory,IOccasion } from "@/types";
-
 import { cacheLife } from "next/cache";
 import { connectDB } from "../mongoose";
 
