@@ -13,6 +13,9 @@ export const POST = apiHandler({
     if (!parsed.success) {
       throw AppError.badRequest(parsed.error.issues[0].message);
     }
+    if(parsed.data.type === "productInquiry" && !parsed.data.product) {
+      throw AppError.badRequest("Product is required for product inquiries.");
+    }
     await connectDB();
     const recentInquiry = await Inquiry.findOne({mobile: parsed.data.mobile}).sort({ createdAt: -1 });
     if(recentInquiry && (new Date().getTime() - recentInquiry.createdAt.getTime()) < 3600000) {

@@ -1,14 +1,14 @@
 "use client";
 
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { Button } from "@/components/ui/Button";
+import { useCreateInquiryMutation } from "@/lib/react-query/mutations";
+import { cn } from "@/lib/utils";
 import { createInquirySchema } from "@/schemas/inquiry.schema";
 import { InquiryFormData } from "@/types/inquiry";
-import { useCreateInquiryMutation } from "@/lib/react-query/mutations";
-import { Button } from "@/components/ui/Button";
-import { cn } from "@/lib/utils";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { AlertCircle, CheckCircle2 } from "lucide-react";
 import { useState } from "react";
-import { CheckCircle2, AlertCircle } from "lucide-react";
+import { useForm } from "react-hook-form";
 
 const CATEGORY_OPTIONS = [
   "General",
@@ -27,12 +27,16 @@ interface InquiryFormProps {
   defaultCategory?: string;
   className?: string;
   categories: { name: string; slug: string; _id: string }[];
+  inquiryType?: "generalInquiry" | "productInquiry";
+  productId?: string;
 }
 
 export function InquiryForm({
   defaultCategory = "6a76fc1369d1f8dfe00c0a8f",
   className,
-  categories
+  categories,
+  inquiryType = "generalInquiry",
+  productId,
 }: InquiryFormProps) {
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
@@ -53,6 +57,8 @@ export function InquiryForm({
       mobile: "",
       email: undefined,
       message: undefined,
+      product: productId,
+      type: inquiryType,
     },
   });
 
@@ -68,6 +74,8 @@ export function InquiryForm({
           mobile: "",
           email: undefined,
           message: undefined,
+          product: productId,
+          type: inquiryType,
         });
       },
       onError: (err) => {
@@ -103,22 +111,24 @@ export function InquiryForm({
             />
           </Field>
 
-          <Field label="Category" required error={errors.category?.message}>
-            <select
-              {...register("category")}
-              className={cn(
-                inputClass(!!errors.category),
-                "appearance-none bg-surface",
-              )}
-              aria-invalid={!!errors.category}
-            >
-              {categories.map((cat) => (
-                <option key={cat._id} value={cat._id}>
-                  {cat.name}
-                </option>
-              ))}
-            </select>
-          </Field>
+          {inquiryType === "generalInquiry" && (
+            <Field label="Category" required error={errors.category?.message}>
+              <select
+                {...register("category")}
+                className={cn(
+                  inputClass(!!errors.category),
+                  "appearance-none bg-surface",
+                )}
+                aria-invalid={!!errors.category}
+              >
+                {categories.map((cat) => (
+                  <option key={cat._id} value={cat._id}>
+                    {cat.name}
+                  </option>
+                ))}
+              </select>
+            </Field>
+          )}
 
           <Field label="Mobile" required error={errors.mobile?.message}>
             <input

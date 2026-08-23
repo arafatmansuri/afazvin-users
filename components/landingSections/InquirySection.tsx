@@ -8,9 +8,13 @@ export async function InquirySection(
   {
     categories,
     defaultCategory,
-  }: { categories: ICategory[]; defaultCategory?: string } = {
+    inquiryType,
+    productId,
+  }: { categories: ICategory[]; defaultCategory?: string; inquiryType?: "generalInquiry" | "productInquiry"; productId?: string } = {
     categories: [],
     defaultCategory: "6a76fc1369d1f8dfe00c0a8f",
+    inquiryType: "generalInquiry",
+    productId: undefined,
   },
 ) {
   "use cache";
@@ -48,6 +52,8 @@ export async function InquirySection(
                   slug: cat.slug,
                   _id: cat._id.toString(),
                 }))}
+                inquiryType={inquiryType}
+                productId={productId}
               />
             </div>
           </div>
