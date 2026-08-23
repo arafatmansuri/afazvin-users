@@ -1,5 +1,5 @@
 import CollectionBody from "@/components/clothing/CollectionBody";
-import { CategorySkeleton, ProductSkeleton, Skeleton } from "@/components/ui/ProductSkeleton";
+import { CategorySkeleton } from "@/components/ui/ProductSkeleton";
 import { resolveCollectionSlug } from "@/constants/catalog";
 import { getCategories, getOccasions } from "@/lib/placeholder-data/landing";
 import type { Metadata } from "next";
@@ -27,7 +27,7 @@ export async function generateMetadata({
     description:
       entity.description ??
       `Browse our ${entity.name} menswear collection for wholesale partners.`,
-    icons: { icon: "/icon.png" },
+    // icons: { icon: "/icon.png" },
   };
 }
 
@@ -53,7 +53,5 @@ export async function CollectionPageSuspense({
 }) {
   const { slug } = await params;
 
-  return (
-      <CollectionBody slug={slug} searchParams={searchParams} />
-  );
+  return <CollectionBody slug={slug} searchParams={searchParams} />;
 }

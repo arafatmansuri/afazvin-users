@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Mail, Phone, MessageCircle } from "lucide-react";
+import { Mail, Phone, MessageCircle, LocationEdit, MapPin } from "lucide-react";
 import { ICategory } from "@/types";
 import { CurrentYear } from "../landingSections/CurrentYear";
 import { Suspense } from "react";
@@ -20,7 +20,7 @@ import { Suspense } from "react";
 const QUICK_LINKS = [
   { name: "About Us", href: "/about" },
   { name: "Contact", href: "/contact" },
-  { name: "FAQs", href: "/faq" },
+  // { name: "FAQs", href: "/faq" },
 ];
 
 export function Footer({ categories }: { categories: ICategory[] }) {
@@ -85,25 +85,25 @@ export function Footer({ categories }: { categories: ICategory[] }) {
             <ul className="space-y-3">
               <li>
                 <a
-                  href="mailto:hello@afazvin.com"
+                  href="mailto:shahidraza373@gmail.com"
                   className="inline-flex items-center gap-2.5 text-sm text-text-inverse/75 hover:text-accent transition-colors"
                 >
                   <Mail className="h-4 w-4 shrink-0" strokeWidth={1.5} />
-                  hello@afazvin.com
+                  shahidraza373@gmail.com
                 </a>
               </li>
               <li>
                 <a
-                  href="tel:+919876543210"
+                  href="tel:+917016416223"
                   className="inline-flex items-center gap-2.5 text-sm text-text-inverse/75 hover:text-accent transition-colors"
                 >
                   <Phone className="h-4 w-4 shrink-0" strokeWidth={1.5} />
-                  +91 98765 43210
+                  +91 70164 16223
                 </a>
               </li>
               <li>
                 <a
-                  href="https://wa.me/919876543210"
+                  href="https://wa.me/7698868786"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2.5 text-sm text-text-inverse/75 hover:text-accent transition-colors"
@@ -114,6 +114,17 @@ export function Footer({ categories }: { categories: ICategory[] }) {
                   />
                   WhatsApp
                 </a>
+              </li>
+              <li>
+                <span
+                  className="inline-flex items-center gap-2.5 text-sm text-text-inverse/75 hover:text-accent transition-colors"
+                >
+                  <MapPin
+                    className="h-4 w-4 shrink-0"
+                    strokeWidth={1.5}
+                  />
+                  Ahmedabad, India
+                </span>
               </li>
             </ul>
 
@@ -153,8 +164,12 @@ export function Footer({ categories }: { categories: ICategory[] }) {
         </div>
 
         <div className="mt-14 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <Suspense fallback={<span className="text-xs text-text-inverse/50">Loading...</span>}>
-          <CurrentYear/>
+          <Suspense
+            fallback={
+              <span className="text-xs text-text-inverse/50">Loading...</span>
+            }
+          >
+            <CurrentYear />
           </Suspense>
           <p className="text-xs text-text-inverse/50">
             Wholesale Menswear Manufacturer
