@@ -1,9 +1,9 @@
-import Link from "next/link";
-import Image from "next/image";
-import { Mail, Phone, MessageCircle, LocationEdit, MapPin } from "lucide-react";
 import { ICategory } from "@/types";
-import { CurrentYear } from "../landingSections/CurrentYear";
+import { Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 import { Suspense } from "react";
+import { CurrentYear } from "../landingSections/CurrentYear";
 
 // const CATEGORIES = [
 //   { name: "Blazers", slug: "blazers" },
@@ -116,13 +116,8 @@ export function Footer({ categories }: { categories: ICategory[] }) {
                 </a>
               </li>
               <li>
-                <span
-                  className="inline-flex items-center gap-2.5 text-sm text-text-inverse/75 hover:text-accent transition-colors"
-                >
-                  <MapPin
-                    className="h-4 w-4 shrink-0"
-                    strokeWidth={1.5}
-                  />
+                <span className="inline-flex items-center gap-2.5 text-sm text-text-inverse/75 hover:text-accent transition-colors">
+                  <MapPin className="h-4 w-4 shrink-0" strokeWidth={1.5} />
                   Ahmedabad, India
                 </span>
               </li>
@@ -130,7 +125,7 @@ export function Footer({ categories }: { categories: ICategory[] }) {
 
             <div className="flex items-center gap-4 mt-6">
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/libas_creation7860"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"

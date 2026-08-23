@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { Phone } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Phone } from "lucide-react";
+import { useEffect, useState } from "react";
 
-const WHATSAPP_NUMBER = "919876543210";
-const CALL_NUMBER = "+919876543210";
+const WHATSAPP_NUMBER = "917698868786";
+const CALL_NUMBER = "+917016416223";
 
 export function FloatingActions() {
   const [visible, setVisible] = useState(false);
