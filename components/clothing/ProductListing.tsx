@@ -109,17 +109,26 @@ export function ProductListing({
 
   return (
     <div>
-      <ProductFilters
-        value={filters}
-        onChange={setFilters}
-        categories={categories}
-        occasions={occasions}
-      />
-
-      <p className="mt-6 text-sm text-text-secondary">
-        <span className="text-text-primary tabular-nums">{total}</span>
-        {total === 1 ? " Product" : " Products"}
-      </p>
+      <div className="flex flex-col gap-6 md:flex-row md:flex-wrap md:items-start md:justify-between md:gap-4">
+          <h1 className="type-h1 text-text-primary">Clothing</h1>
+        {/* <div className="flex-1 min-w-0 text-center px-2 justify-start"> */}
+          {/* <p className="mt-2 mx-auto max-w-xl text-xs md:text-sm leading-relaxed text-text-secondary">
+            The full manufacturing range for retail partners — tailored menswear
+            across categories, crafted for shops that value finish and
+            consistency.
+          </p> */}
+        {/* </div> */}
+        <div className="flex gap-5"><ProductFilters
+          value={filters}
+          onChange={setFilters}
+          categories={categories}
+          occasions={occasions}
+        />
+        <p className="mt-6 text-sm text-text-secondary">
+          <span className="text-text-primary tabular-nums">{total}</span>
+          {total === 1 ? " Result" : " Results"}
+        </p></div>
+      </div>
 
       {products.length === 0 && !query.isLoading ? (
         <div className="flex min-h-[400px] flex-col items-center justify-center gap-6 px-4 py-16 text-center">

@@ -30,14 +30,14 @@ export default async function Cloths({
             className="mb-6"
           />
 
-          <header className="mb-10 md:mb-16">
+          {/* <header className="mb-10 md:mb-16">
             <h1 className="type-h1 text-text-primary">Clothing</h1>
             <p className="mt-4 max-w-xl text-lg leading-relaxed text-text-secondary">
               The full manufacturing range for retail partners — tailored
               menswear across categories, crafted for shops that value finish
               and consistency.
             </p>
-          </header>
+          </header> */}
 
           <Suspense fallback={<ProductSkeleton />}>
             <ProductListing
