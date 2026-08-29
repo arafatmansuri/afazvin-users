@@ -28,7 +28,7 @@ const inquirySchema = new mongoose.Schema(
     message: String,
     type:{
       type: String,
-      enum: ["generalInquiry", "productInquiry"],
+      enum: ["generalInquiry", "productInquiry","contactInquiry"],
       required: true,
     }
   },

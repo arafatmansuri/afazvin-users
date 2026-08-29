@@ -15,5 +15,5 @@ export const createInquirySchema = z.object({
   city: z.string({ error: "City is required" }).nonoptional({ error: "City is required" }),
   email: z.email({ error: "Invalid email address" }).optional(),
   message: z.string().optional(),
-  type: z.enum(["generalInquiry", "productInquiry"], { error: "Type is required" }).nonoptional({ error: "Type is required" }),
+  type: z.enum(["generalInquiry", "productInquiry","contactInquiry"], { error: "Type is required" }).nonoptional({ error: "Type is required" }),
 });

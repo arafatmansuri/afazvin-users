@@ -1,4 +1,4 @@
-import { InquiryForm } from "@/components/forms/InquiryForm";
+import { InquiryForm, inquiryType } from "@/components/forms/InquiryForm";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { ICategory } from "@/types";
 import { cacheLife } from "next/cache";
@@ -10,7 +10,7 @@ export async function InquirySection(
     defaultCategory,
     inquiryType,
     productId,
-  }: { categories: ICategory[]; defaultCategory?: string; inquiryType?: "generalInquiry" | "productInquiry"; productId?: string } = {
+  }: { categories: ICategory[]; defaultCategory?: string; inquiryType?: inquiryType; productId?: string } = {
     categories: [],
     defaultCategory: "6a76fc1369d1f8dfe00c0a8f",
     inquiryType: "generalInquiry",

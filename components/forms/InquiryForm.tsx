@@ -10,11 +10,13 @@ import { AlertCircle, CheckCircle2 } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
+export type inquiryType = "generalInquiry" | "productInquiry" | "contactInquiry";
+
 interface InquiryFormProps {
   defaultCategory?: string;
   className?: string;
   categories: { name: string; slug: string; _id: string }[];
-  inquiryType?: "generalInquiry" | "productInquiry";
+  inquiryType?: inquiryType;
   productId?: string;
 }
 
@@ -190,7 +192,7 @@ export function InquiryForm({
           isLoading={mutation.isPending}
           className="mt-2 uppercase tracking-wider"
         >
-          Submit Inquiry
+          {inquiryType === "generalInquiry" ? "Submit Inquiry" : inquiryType === "productInquiry" ? "Request Pricing" : "Contact Us"}
         </Button>
       </form>
     </div>
