@@ -4,18 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
 import { CurrentYear } from "../landingSections/CurrentYear";
-
-// const CATEGORIES = [
-//   { name: "Blazers", slug: "blazers" },
-//   { name: "Suit Sherwani", slug: "suit-sherwani" },
-//   { name: "Indo Western", slug: "indo-western" },
-//   { name: "Jodhpuri", slug: "jodhpuri" },
-//   { name: "Fabrics", slug: "fabrics" },
-//   { name: "Readymade Garments", slug: "readymade-garments" },
-//   { name: "Ethnic Wear", slug: "ethnic-wear" },
-//   { name: "Koti Indo", slug: "koti-indo" },
-//   { name: "Koti Kurta", slug: "koti-kurta" },
-// ];
+import { CONTACT } from "@/constants/contact";
 
 const QUICK_LINKS = [
   { name: "About Us", href: "/about" },
@@ -85,25 +74,25 @@ export function Footer({ categories }: { categories: ICategory[] }) {
             <ul className="space-y-3">
               <li>
                 <a
-                  href="mailto:shahidraza373@gmail.com"
+                  href={CONTACT.email.href}
                   className="inline-flex items-center gap-2.5 text-sm text-text-inverse/75 hover:text-accent transition-colors"
                 >
                   <Mail className="h-4 w-4 shrink-0" strokeWidth={1.5} />
-                  shahidraza373@gmail.com
+                  {CONTACT.email.label}
                 </a>
               </li>
               <li>
                 <a
-                  href="tel:+917016416223"
+                  href={CONTACT.phones[0].href}
                   className="inline-flex items-center gap-2.5 text-sm text-text-inverse/75 hover:text-accent transition-colors"
                 >
                   <Phone className="h-4 w-4 shrink-0" strokeWidth={1.5} />
-                  +91 70164 16223
+                  {CONTACT.phones[0].label}
                 </a>
               </li>
               <li>
                 <a
-                  href="https://wa.me/7698868786"
+                  href={CONTACT.whatsapp.href}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2.5 text-sm text-text-inverse/75 hover:text-accent transition-colors"
@@ -125,7 +114,7 @@ export function Footer({ categories }: { categories: ICategory[] }) {
 
             <div className="flex items-center gap-4 mt-6">
               <a
-                href="https://www.instagram.com/libas_creation7860"
+                href={CONTACT.social.instagram.href}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
@@ -140,7 +129,7 @@ export function Footer({ categories }: { categories: ICategory[] }) {
                 </svg>
               </a>
               <a
-                href="https://facebook.com"
+                href={CONTACT.social.facebook.href}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook"

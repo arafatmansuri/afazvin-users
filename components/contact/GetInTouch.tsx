@@ -40,7 +40,7 @@ export function GetInTouch() {
             <h3 className="type-eyebrow text-text-secondary">Email</h3>
             <a
               href={email.href}
-              className="text-lg text-text-primary hover:text-primary transition-colors duration-200 underline-offset-4 hover:underline break-all"
+              className="text-lg text-text-primary hover:text-primary transition-colors duration-200 underline-offset-4 hover:underline"
             >
               {email.label}
             </a>
