@@ -19,6 +19,7 @@ export interface IProduct {
   category: string;
   occasion?: string | null;
   isHandPicked: boolean;
+  status: "draft" | "published";
 }
 export interface ProductListResult {
   products: IProduct[];
@@ -33,6 +34,7 @@ export type ProductListParams = {
   occasion?: string;
   sort?: ProductSort;
   page?: number;
+  status?: "draft" | "published";
 }
 
 export type ProductListingProps = {

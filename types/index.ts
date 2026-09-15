@@ -4,6 +4,7 @@ export interface ICategory {
   slug: string;
   image: string;
   description?: string | null;
+  isActive: boolean;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -14,6 +15,7 @@ export interface IOccasion {
   slug: string;
   image: string;
   description?: string | null;
+  isActive: boolean;
   createdAt: Date;
   updatedAt: Date;
 }

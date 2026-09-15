@@ -33,7 +33,7 @@ export async function getCategories(): Promise<ICategory[]> {
   "use cache";
   cacheLife("days");
   await connectDB();
-  const categories = await Category.find().lean();
+  const categories = await Category.find({ isActive: true }).lean();
   return categories.map((cat) => ({
     ...cat,
     _id: cat._id.toString(),
@@ -44,7 +44,7 @@ export async function getOccasions(): Promise<IOccasion[]> {
   "use cache";
   cacheLife("days");
   await connectDB();
-  const occasions = await Occasion.find().lean();
+  const occasions = await Occasion.find({ isActive: true }).lean();
   return occasions.map((occasion) => ({
     ...occasion,
     _id: occasion._id.toString(),
@@ -55,7 +55,7 @@ export async function getBestSellers(limit: number): Promise<IProduct[]> {
   "use cache";
   cacheLife("days");
   await connectDB();
-  const bestSellers = await Product.find({ isBestSeller: true })
+  const bestSellers = await Product.find({ isBestSeller: true, status: "published" })
     .sort({ views: -1 })
     .limit(limit)
     .lean();

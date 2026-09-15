@@ -11,7 +11,7 @@ export async function findCategoryByName(
   name: string,
 ): Promise<ICategory | null> {
   await connectDB();
-  const category = await Category.findOne({ name }).lean();
+  const category = await Category.findOne({ name,isActive:true }).lean();
   if (!category) {
     return null;
   }
@@ -23,7 +23,7 @@ export async function findCategoryBySlug(
   "use cache";
   cacheLife("days");
   await connectDB();
-  const category = await Category.findOne({ slug }).lean();
+  const category = await Category.findOne({ slug, isActive: true }).lean();
   if (!category) {
     return null;
   }
@@ -33,7 +33,7 @@ export async function findOccasionByName(
   name: string,
 ): Promise<IOccasion | null> {
   await connectDB();
-  const occasion = await Occasion.findOne({ name }).lean();
+  const occasion = await Occasion.findOne({ name, isActive: true }).lean();
   if (!occasion) {
     return null;
   }
@@ -45,7 +45,7 @@ export async function findOccasionBySlug(
   "use cache";
   cacheLife("days");
   await connectDB();
-  const occasion = await Occasion.findOne({ slug }).lean();
+  const occasion = await Occasion.findOne({ slug, isActive: true }).lean();
   if (!occasion) {
     return null;
   }
@@ -56,7 +56,7 @@ export async function findCategoryById(id: string): Promise<ICategory | null> {
   cacheLife("days");
   await connectDB();
   const category = await Category.findById(new Types.ObjectId(id)).lean();
-  if (!category) {
+  if (!category || !category.isActive) {
     return null;
   }
   return { ...category, _id: category._id.toString() };
@@ -66,7 +66,7 @@ export async function findOccasionById(id: string): Promise<IOccasion | null> {
   cacheLife("days");
   await connectDB();
   const occasion = await Occasion.findById(new Types.ObjectId(id)).lean();
-  if (!occasion) {
+  if (!occasion || !occasion.isActive) {
     return null;
   }
   return { ...occasion, _id: occasion._id.toString() };
@@ -75,7 +75,7 @@ export async function getProductById(id: string): Promise<IProduct | null> {
   "use cache";
   cacheLife("days");
   const product = await Product.findById(new Types.ObjectId(id)).lean();
-  if (!product) {
+  if (!product || product.status !== "published") {
     return null;
   }
   return product;
@@ -83,7 +83,7 @@ export async function getProductById(id: string): Promise<IProduct | null> {
 export async function getProductBySlug(slug: string): Promise<IProduct | null> {
   "use cache";
   cacheLife("days");
-  const product = await Product.findOne({ slug }).lean();
+  const product = await Product.findOne({ slug, status: "published" }).lean();
   if (!product) {
     return null;
   }

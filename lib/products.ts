@@ -18,7 +18,7 @@ const LIMIT = 20;
 const validSorts = ["hand-picked", "best-sellers", "new", "popular"] as const;
 
 export async function getProducts(
-  filters: ProductListParams = {},
+  filters: ProductListParams = { status: "published" },
   skip: number = 0,
   usedBy: "route" | "client" = "route",
   page: number = 1,
@@ -88,7 +88,7 @@ export async function getProductsFilter({
     ? sortParam
     : "new";
 
-  const filter: Record<string, unknown> = {};
+  const filter: Record<string, unknown> = { status: "published" };
   if (sort === "hand-picked") filter.isHandPicked = true;
   if (sort === "best-sellers") filter.isBestSeller = true;
   const slugs: Record<string, string> = {};

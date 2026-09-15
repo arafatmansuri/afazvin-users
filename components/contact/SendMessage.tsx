@@ -1,12 +1,8 @@
 import { InquiryForm } from "@/components/forms/InquiryForm";
-import { CATALOG_CATEGORIES } from "@/constants/catalog";
+import { getCategories } from "@/lib/placeholder-data/landing";
 
-export function SendMessage() {
-  const categories = CATALOG_CATEGORIES.map((c) => ({
-    _id: c.slug,
-    name: c.name,
-    slug: c.slug,
-  }));
+export async function SendMessage() {
+  const categories = await getCategories();
 
   return (
     <section

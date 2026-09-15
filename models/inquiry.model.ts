@@ -30,7 +30,12 @@ const inquirySchema = new mongoose.Schema(
       type: String,
       enum: ["generalInquiry", "productInquiry","contactInquiry"],
       required: true,
-    }
+    },
+    status: {
+      type: String,
+      enum: ["pending","inTouch", "resolved"],
+      default: "pending",
+    },
   },
   { timestamps: true },
 );
