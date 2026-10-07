@@ -8,7 +8,8 @@ const productSchema = new mongoose.Schema(
     },
     slug: {
       type: String,
-      required: true
+      required: true,
+      unique:true
     },
     category: {
       ref: "Category",
@@ -67,6 +68,11 @@ const productSchema = new mongoose.Schema(
     },
   },
   { timestamps: true },
+);
+
+productSchema.index(
+  { slug: 1 },
+  { unique: true, sparse: true },
 );
 
 productSchema.index({
