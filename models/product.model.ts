@@ -9,7 +9,7 @@ const productSchema = new mongoose.Schema(
     slug: {
       type: String,
       required: true,
-      unique:true
+      unique: true,
     },
     category: {
       ref: "Category",
@@ -27,13 +27,24 @@ const productSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    thumbnailImagePublicId: {
+      type: String,
+    },
     thumbnailImageAlt: {
       type: String,
     },
     hoverImage: {
       type: String,
     },
+    hoverImagePublicId: {
+      type: String,
+    },
     images: [
+      {
+        type: String,
+      },
+    ],
+    imagePublicIds: [
       {
         type: String,
       },
@@ -47,6 +58,9 @@ const productSchema = new mongoose.Schema(
       type: Number,
     },
     video: {
+      type: String,
+    },
+    videoPublicId: {
       type: String,
     },
     views: {
@@ -70,10 +84,7 @@ const productSchema = new mongoose.Schema(
   { timestamps: true },
 );
 
-productSchema.index(
-  { slug: 1 },
-  { unique: true, sparse: true },
-);
+productSchema.index({ slug: 1 }, { unique: true, sparse: true });
 
 productSchema.index({
   createdAt: -1,
